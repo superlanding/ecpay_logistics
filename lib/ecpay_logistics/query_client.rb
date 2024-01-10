@@ -118,7 +118,7 @@ module ECpayLogistics
                 # gen post html
                 api_url = verify_query_api.get_svc_url(apiname, @helper.get_op_mode)
                 #post from server
-                if apiname == 'Map' or apiname == 'printTradeDocument'
+                if apiname == 'Map'
                   resp = @helper.gen_html_post_form(act: api_url, id: '_form_map', parameters: params)
                 else
                   resp = @helper.http_request(method: 'POST', url: api_url, payload: params)
