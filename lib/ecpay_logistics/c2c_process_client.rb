@@ -20,6 +20,8 @@ module ECpayLogistics
 
     class C2CProcessClient
 
+        attr_accessor :helper
+
         def initialize
             @helper = ECpayLogistics::APIHelper.new
         end

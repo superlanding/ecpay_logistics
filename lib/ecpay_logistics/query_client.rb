@@ -19,6 +19,8 @@ module ECpayLogistics
 
     class QueryClient
 
+        attr_accessor :helper
+
         def initialize
             @helper = ECpayLogistics::APIHelper.new
         end

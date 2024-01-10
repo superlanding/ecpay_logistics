@@ -21,6 +21,8 @@ module ECpayLogistics
 	class ReturnClient
         include ECpayErrorDefinition
 
+        attr_accessor :helper
+
         def initialize
             @helper = ECpayLogistics::APIHelper.new
         end

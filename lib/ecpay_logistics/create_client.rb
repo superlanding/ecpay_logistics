@@ -21,6 +21,8 @@ module ECpayLogistics
 	class CreateClient
         include ECpayErrorDefinition
 
+        attr_accessor :helper
+
         def initialize
             @helper = ECpayLogistics::APIHelper.new
             @verify_create = ECpayLogistics::CreateParamVerify.new
