@@ -17,7 +17,7 @@
         <pattern>^\d{7,10}$</pattern>
       </param>
       <param type="String"  require="1" name="MerchantTradeNo">
-        <pattern>^[a-zA-Z0-9]{0,20}$</pattern>
+        <pattern>^[a-zA-Z0-9_]{0,20}$</pattern>
       </param>
       <param type="String"  require="1" name="MerchantTradeDate">
         <pattern>^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}$</pattern>
