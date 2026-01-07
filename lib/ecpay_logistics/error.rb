@@ -4,5 +4,5 @@ module ECpayErrorDefinition
   class ECpayMissingOption < ECpayError; end
   class ECpayInvalidMode < ECpayError; end
   class ECpayInvalidParam < ECpayError; end
-    class ECpayLogisticsRuleViolate < ECpayError; end
+  class ECpayLogisticsRuleViolate < ECpayError; end
 end
