@@ -1,0 +1,34 @@
+# Ruby version management
+.ruby-version.bak
+
+# RSpec
+spec/examples.txt
+.rspec_status
+
+# Coverage reports
+coverage/
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Gem files
+*.gem
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/

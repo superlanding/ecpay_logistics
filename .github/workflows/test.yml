@@ -1,0 +1,88 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ['2.7.6', '3.0.7', '3.1.7']
+
+    name: Ruby ${{ matrix.ruby-version }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+    - name: Install dependencies
+      run: bundle install
+
+    - name: Run tests
+      run: bundle exec rspec --format documentation
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-ruby-${{ matrix.ruby-version }}
+        path: |
+          spec/examples.txt
+          coverage/
+        if-no-files-found: ignore
+
+  # Optional: Test on macOS if needed
+  test-macos:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ['2.7.6', '3.0.7', '3.1.7']
+
+    name: Ruby ${{ matrix.ruby-version }} (macOS)
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Install dependencies
+      run: bundle install
+
+    - name: Run tests
+      run: bundle exec rspec --format documentation
+
+  # Check code quality
+  lint:
+    runs-on: ubuntu-latest
+    name: RuboCop
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1.7'
+        bundler-cache: true
+
+    - name: Install RuboCop
+      run: gem install rubocop
+
+    - name: Run RuboCop
+      run: rubocop --format progress
+      continue-on-error: true # Don't fail the build on RuboCop errors for now
