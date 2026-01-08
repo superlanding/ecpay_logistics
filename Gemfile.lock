@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ecpay_logistics (2.0.0)
+    ecpay_logistics (2.0.1)
       nokogiri (>= 1.6)
 
 GEM
