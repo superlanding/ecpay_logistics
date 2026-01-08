@@ -44,34 +44,6 @@ jobs:
           coverage/
         if-no-files-found: ignore
 
-  # Optional: Test on macOS if needed
-  test-macos:
-    runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby-version: ['2.7.6', '3.0.7', '3.1.7']
-
-    name: Ruby ${{ matrix.ruby-version }} (macOS)
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Ruby ${{ matrix.ruby-version }}
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: false
-
-    - name: Install dependencies
-      run: |
-        gem install bundler
-        rm -f Gemfile.lock
-        bundle install
-
-    - name: Run tests
-      run: bundle exec rspec --format documentation
-
   # Check code quality
   lint:
     runs-on: ubuntu-latest
