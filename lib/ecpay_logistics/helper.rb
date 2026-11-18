@@ -1,6 +1,6 @@
 require 'digest'
 require 'uri'
-require 'cgi'
+require 'cgi/escape'
 require 'net/http'
 require 'nokogiri'
 require 'date'

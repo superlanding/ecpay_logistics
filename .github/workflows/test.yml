@@ -8,11 +8,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # ubuntu-latest（26.04）沒有 Ruby 2.7.6 的預編譯版，2.7.6 固定用 24.04
+    runs-on: ${{ matrix.ruby-version == '2.7.6' && 'ubuntu-24.04' || 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: ['2.7.6', '3.0.7', '3.1.7']
+        ruby-version: ['2.7.6', '3.0.7', '3.1.7', '3.4', '4.0']
 
     name: Ruby ${{ matrix.ruby-version }}
 
@@ -27,7 +28,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        gem install bundler -v 2.4.22
+        case "${{ matrix.ruby-version }}" in
+          2.7.*|3.0.*|3.1.*) gem install bundler -v 2.4.22 ;;
+        esac
         rm -f Gemfile.lock
         bundle install
 
