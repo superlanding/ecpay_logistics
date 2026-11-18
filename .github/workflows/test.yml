@@ -8,7 +8,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # ubuntu-latest（26.04）沒有 Ruby 2.7.6 的預編譯版，2.7.6 固定用 24.04
+    runs-on: ${{ matrix.ruby-version == '2.7.6' && 'ubuntu-24.04' || 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:
